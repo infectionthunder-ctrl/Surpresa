@@ -1,13 +1,552 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu site ❤️</title>
+
+    <title>Surpresa ❤️</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            background: #0b0b12;
+
+            font-family: Arial, sans-serif;
+
+            overflow: hidden;
+
+            color: white;
+        }
+
+
+        /* =========================
+           TELA PRINCIPAL
+        ========================= */
+
+        .screen {
+
+            width: 100%;
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            opacity: 0;
+
+            animation: fadeIn 1.5s ease forwards;
+        }
+
+
+        /* =========================
+           MENU
+        ========================= */
+
+        .menu {
+
+            width: min(85%, 360px);
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 16px;
+
+            text-align: center;
+        }
+
+
+        .menu button {
+
+            width: 100%;
+
+            padding: 17px 20px;
+
+            border: none;
+
+            border-radius: 18px;
+
+            background: #ffffff;
+
+            color: #111;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .menu button:hover {
+
+            transform: scale(1.04);
+
+            background: #f0f0f0;
+
+            box-shadow:
+                0 8px 25px rgba(255, 255, 255, 0.15);
+        }
+
+
+        .menu button:active {
+
+            transform: scale(0.97);
+        }
+
+
+        /* =========================
+           TELA EU TE AMO
+        ========================= */
+
+        .love-screen {
+
+            width: min(90%, 700px);
+
+            text-align: center;
+        }
+
+
+        .question {
+
+            color: white;
+
+            font-size: clamp(24px, 5vw, 38px);
+
+            line-height: 1.3;
+
+            margin-bottom: 45px;
+        }
+
+
+        /* =========================
+           BOTÕES DA PERGUNTA
+        ========================= */
+
+        .answer-buttons {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 18px;
+
+            position: relative;
+        }
+
+
+        .answer-buttons button {
+
+            width: 150px;
+
+            padding: 16px 20px;
+
+            border: none;
+
+            border-radius: 18px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease;
+        }
+
+
+        /* SIM */
+
+        .yes {
+
+            background: white;
+
+            color: #111;
+        }
+
+
+        .yes:hover {
+
+            transform: scale(1.05);
+
+            background: #f0f0f0;
+        }
+
+
+        /* NÃO */
+
+        .no {
+
+            background: #252530;
+
+            color: white;
+
+            position: relative;
+        }
+
+
+        .no:hover {
+
+            transform: scale(1.05);
+        }
+
+
+        /* =========================
+           BOTÃO VOLTAR
+        ========================= */
+
+        .back-button {
+
+            margin-top: 35px;
+
+            background: transparent;
+
+            border: none;
+
+            color: #aaa;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            transition: color 0.2s ease;
+        }
+
+
+        .back-button:hover {
+
+            color: white;
+        }
+
+
+        /* =========================
+           TRANSIÇÃO ENTRE TELAS
+        ========================= */
+
+        .fade-out {
+
+            animation: fadeOut 0.5s ease forwards;
+        }
+
+
+        .fade-in {
+
+            animation: fadeIn 0.7s ease forwards;
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+
+                opacity: 0;
+
+                transform: scale(0.97);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: scale(1);
+            }
+        }
+
+
+        @keyframes fadeOut {
+
+            from {
+
+                opacity: 1;
+
+                transform: scale(1);
+            }
+
+            to {
+
+                opacity: 0;
+
+                transform: scale(0.97);
+            }
+        }
+
+
+        /* =========================
+           CELULAR
+        ========================= */
+
+        @media (max-width: 500px) {
+
+            .menu {
+
+                width: 82%;
+            }
+
+
+            .menu button {
+
+                padding: 16px;
+
+                font-size: 17px;
+            }
+
+
+            .answer-buttons {
+
+                gap: 12px;
+            }
+
+
+            .answer-buttons button {
+
+                width: 135px;
+
+                font-size: 16px;
+            }
+
+        }
+
+    </style>
+
 </head>
 
+
 <body>
-    <h1>Oi, amor! ❤️</h1>
-    <p>Esse é o nosso site.</p>
+
+
+    <!-- =========================
+         MENU PRINCIPAL
+    ========================= -->
+
+    <main class="screen" id="menuScreen">
+
+        <div class="menu">
+
+            <button onclick="openLoveScreen()">
+                EU TE AMO ❤️
+            </button>
+
+            <button>
+                FOTOS 📸
+            </button>
+
+            <button>
+                CARTA 💌
+            </button>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================
+         TELA EU TE AMO
+    ========================= -->
+
+    <main
+        class="screen"
+        id="loveScreen"
+        style="display: none;"
+    >
+
+        <section class="love-screen">
+
+            <h1 class="question">
+                Eu te amo vida, você quer se casar comigo? 💍
+            </h1>
+
+
+            <div class="answer-buttons">
+
+                <button class="yes">
+                    SIM ❤️
+                </button>
+
+
+                <button
+                    class="no"
+                    id="noButton"
+                >
+                    Não 😿
+                </button>
+
+            </div>
+
+
+            <button
+                class="back-button"
+                onclick="backToMenu()"
+            >
+                ← Voltar
+            </button>
+
+        </section>
+
+    </main>
+
+
+
+    <script>
+
+
+        /* =========================
+           ELEMENTOS
+        ========================= */
+
+        const menuScreen =
+            document.getElementById("menuScreen");
+
+        const loveScreen =
+            document.getElementById("loveScreen");
+
+        const noButton =
+            document.getElementById("noButton");
+
+
+
+        /* =========================
+           ABRIR EU TE AMO
+        ========================= */
+
+        function openLoveScreen() {
+
+            menuScreen.classList.add("fade-out");
+
+
+            setTimeout(() => {
+
+                menuScreen.style.display = "none";
+
+                menuScreen.classList.remove("fade-out");
+
+
+                loveScreen.style.display = "flex";
+
+                loveScreen.classList.add("fade-in");
+
+            }, 500);
+
+        }
+
+
+
+        /* =========================
+           VOLTAR AO MENU
+        ========================= */
+
+        function backToMenu() {
+
+            loveScreen.classList.add("fade-out");
+
+
+            setTimeout(() => {
+
+                loveScreen.style.display = "none";
+
+                loveScreen.classList.remove("fade-out");
+
+
+                menuScreen.style.display = "flex";
+
+                menuScreen.classList.add("fade-in");
+
+            }, 500);
+
+        }
+
+
+
+        /* =========================
+   BOTÃO NÃO
+========================= */
+
+noButton.addEventListener("mouseenter", fugir);
+
+noButton.addEventListener("touchstart", fugir);
+
+function fugir() {
+
+    const buttonWidth = noButton.offsetWidth;
+    const buttonHeight = noButton.offsetHeight;
+
+    const margin = 20;
+
+    const maxX =
+        window.innerWidth -
+        buttonWidth -
+        margin;
+
+    const maxY =
+        window.innerHeight -
+        buttonHeight -
+        margin;
+
+    let x;
+    let y;
+
+    do {
+
+        x =
+            margin +
+            Math.random() *
+            (maxX - margin);
+
+        y =
+            margin +
+            Math.random() *
+            (maxY - margin);
+
+    } while (
+
+        x >
+        window.innerWidth / 2 - 180 &&
+
+        x <
+        window.innerWidth / 2 + 30 &&
+
+        y >
+        window.innerHeight / 2 - 100 &&
+
+        y <
+        window.innerHeight / 2 + 100
+
+    );
+
+    noButton.style.position = "fixed";
+
+    noButton.style.left = x + "px";
+
+    noButton.style.top = y + "px";
+}
+
+
+    </script>
+
+
 </body>
+
 </html>
+```
